@@ -1,9 +1,7 @@
-/* GamepadViewer - Minimal (Xbox: LB, RB, A, B, Left Stick only)
+/* GamepadViewer - Soft Dark Pills + Circles (LB/RB, A/B, Left Stick)
    - Transparent background
-   - Bottom-right overlay
-   - Sketch-like layout
-   - Pressed = red glow
-   - Left stick dot reaches outer ring (full range feel)
+   - Bottom-right
+   - Only shows: LB/RB, A/B, Left stick
 */
 
 html, body {
@@ -13,21 +11,26 @@ html, body {
   overflow: hidden !important;
 }
 
+/* 전체 오버레이 위치/크기 */
 .controller.custom{
   position: fixed;
-  right: 40px;
-  bottom: 40px;
-
-  width: 360px;
-  height: 220px;
-
+  right: 46px;
+  bottom: 46px;
+  width: 520px;
+  height: 240px;
   background: transparent !important;
 }
 
-/* Hide EVERYTHING first */
+/* ---- 안전장치: disconnected여도 숨지 않게 ---- */
+.custom.disconnected,
+.custom.disconnected *{
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* 기본적으로 다 숨기고 필요한 것만 켬 */
 .custom * { display: none; }
 
-/* Enable only what we need */
 .custom .bumpers,
 .custom .bumper,
 .custom .abxy,
@@ -35,15 +38,34 @@ html, body {
 .custom .sticks,
 .custom .stick { display: block; }
 
-/* ===== Common styles ===== */
+/* =========================
+   공통: “둥근 검은 버튼” 느낌
+   ========================= */
+:root{
+  --dark: rgba(12,12,12,0.92);
+  --dark2: rgba(25,25,25,0.92);
+  --text: rgba(255,255,255,0.90);
+  --shadow: 0 10px 20px rgba(0,0,0,0.35);
+  --shadow2: 0 2px 0 rgba(255,255,255,0.06) inset;
+}
+
 .custom .button,
 .custom .bumper{
   position: absolute;
-  box-sizing: border-box;
-  border: 4px solid rgba(0,0,0,0.95);
-  background: rgba(255,255,255,0.02);
+  background: linear-gradient(180deg, var(--dark2), var(--dark));
+  box-shadow: var(--shadow), var(--shadow2);
+  border: 0;
+  transform: translateZ(0);
 }
 
+/* 눌렸을 때(밝아짐). 원하면 빨간 불로 바꿔줄 수도 있어 */
+.custom .button.pressed,
+.custom .bumper.pressed{
+  filter: brightness(1.18);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.45), 0 0 0 2px rgba(255,255,255,0.06) inset;
+}
+
+/* 글자 스타일 */
 .custom .button::after,
 .custom .bumper::after{
   content: "";
@@ -52,154 +74,116 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font: 900 24px/1 sans-serif;
-  color: rgba(0,0,0,0.95);
+  font: 800 34px/1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  text-shadow: 0 2px 0 rgba(0,0,0,0.35);
 }
 
-/* Pressed = red light */
-.custom .button.pressed,
-.custom .bumper.pressed{
-  border-color: rgba(255, 0, 0, 0.95);
-  box-shadow: 0 0 18px rgba(255, 0, 0, 0.9);
-  background: rgba(255, 0, 0, 0.10);
-}
-
-/* ===== LB / RB rectangles (top) ===== */
+/* =========================
+   LB / RB (알약)
+   ========================= */
 .custom .bumpers{
   position: absolute;
   left: 0;
   top: 0;
-  width: 360px;
-  height: 70px;
+  width: 520px;
+  height: 90px;
 }
 
-/* LB */
 .custom .bumper.left{
-  left: 40px;
-  top: 10px;
-  width: 135px;
-  height: 50px;
-  border-radius: 0;
+  left: 60px;
+  top: 16px;
+  width: 190px;
+  height: 58px;
+  border-radius: 999px;
 }
-.custom .bumper.left::after{ content: "LB"; }
+.custom .bumper.left::after{ content: "L"; }
 
-/* RB */
 .custom .bumper.right{
-  right: 40px;
-  top: 10px;
-  width: 135px;
-  height: 50px;
-  border-radius: 0;
+  left: 270px;
+  top: 16px;
+  width: 190px;
+  height: 58px;
+  border-radius: 999px;
 }
-.custom .bumper.right::after{ content: "RB"; }
+.custom .bumper.right::after{ content: "R"; }
 
-/* ===== A / B (Xbox: A bottom, B right) ===== */
+/* =========================
+   A / B (동그라미)
+   ========================= */
 .custom .abxy{
   position: absolute;
-  right: 0;
-  top: 70px;
-  width: 200px;
-  height: 150px;
+  left: 0;
+  top: 0;
+  width: 520px;
+  height: 240px;
 }
 
-/* hide X/Y completely */
+/* X/Y는 완전 숨김 */
 .custom .abxy .x,
 .custom .abxy .y{ display: none !important; }
 
-/* A (bottom) */
-.custom .button.a{
-  width: 62px;
-  height: 62px;
-  border-radius: 999px;
-  right: 100px;
-  top: 85px;
-}
-.custom .button.a::after{ content: "A"; }
-
-/* B (right) */
+/* 이미지처럼 B가 중앙쪽, A가 오른쪽 위 느낌 */
 .custom .button.b{
-  width: 62px;
-  height: 62px;
+  left: 330px;
+  top: 136px;
+  width: 86px;
+  height: 86px;
   border-radius: 999px;
-  right: 40px;
-  top: 55px;
 }
 .custom .button.b::after{ content: "B"; }
 
-/* =========================================================
-   Left Stick (FULL RANGE FEEL)
-   - Outer big circle stays
-   - Inner moving circle (with "L") centers via 50%/50%
-   - Lets GV's transform translate move it farther visually
-   ========================================================= */
+.custom .button.a{
+  left: 410px;
+  top: 96px;
+  width: 86px;
+  height: 86px;
+  border-radius: 999px;
+}
+.custom .button.a::after{ content: "A"; }
 
-/* stick group position */
+/* =========================
+   Left Stick (큰 회색 바탕 + 검은 스틱)
+   ========================= */
 .custom .sticks{
   position: absolute;
-  left: 30px;
-  top: 80px;
-
-  /* outer circle size */
-  width: 180px;
-  height: 180px;
+  left: 40px;
+  top: 88px;
+  width: 220px;
+  height: 220px;
 }
 
-/* hide right stick completely */
+/* 오른쪽 스틱 숨김 */
 .custom .stick.right{ display: none !important; }
 
-/* Outer big circle */
+/* 큰 회색 바탕 원 */
 .custom .sticks::before{
   content: "";
   position: absolute;
   left: 0;
   top: 0;
-  width: 180px;
-  height: 180px;
+  width: 190px;
+  height: 190px;
   border-radius: 999px;
-  border: 5px solid rgba(0,0,0,0.95);
-  background: rgba(255,255,255,0.02);
-  box-sizing: border-box;
+  background: rgba(210,210,210,0.95);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.28);
 }
 
-/* Inner moving circle (this is the "L" circle you mentioned) */
+/* 움직이는 검은 스틱 원(좌스틱) */
 .custom .stick.left{
   position: absolute;
-  left: 50%;
-  top: 50%;
-
-  width: 54px;
-  height: 54px;
-  margin-left: -27px;
-  margin-top: -27px;
-
+  left: 95px;
+  top: 95px;
+  width: 104px;
+  height: 104px;
+  margin-left: -52px;
+  margin-top: -52px;
   border-radius: 999px;
-  border: 4px solid rgba(0,0,0,0.95);
-  background: rgba(255,255,255,0.02);
-  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(25,25,25,0.95), rgba(8,8,8,0.95));
+  box-shadow: 0 14px 22px rgba(0,0,0,0.40), 0 2px 0 rgba(255,255,255,0.06) inset;
 }
 
-/* "L" label inside the moving circle */
-.custom .stick.left::after{
-  content: "L";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font: 900 26px/1 sans-serif;
-  color: rgba(0,0,0,0.95);
-}
-
-/* If GV marks stick pressed, glow red */
+/* (선택) 스틱 클릭 시 살짝 강조 */
 .custom .stick.pressed.left{
-  border-color: rgba(255, 0, 0, 0.95);
-  box-shadow: 0 0 18px rgba(255, 0, 0, 0.9);
-  background: rgba(255, 0, 0, 0.10);
+  filter: brightness(1.15);
 }
-
-/* Fix: even when disconnected, don't hide our overlay elements */
-.custom.disconnected { background: transparent !important; }
-.custom.disconnected div { display: block !important; }
-.custom.disconnected * { display: block !important; }
-.custom.disconnected .x, .custom.disconnected .y, .custom.disconnected .stick.right { display: none !important; }
-

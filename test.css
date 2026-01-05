@@ -196,3 +196,10 @@ html, body {
   box-shadow: 0 0 18px rgba(255, 0, 0, 0.9);
   background: rgba(255, 0, 0, 0.10);
 }
+
+/* Fix: even when disconnected, don't hide our overlay elements */
+.custom.disconnected { background: transparent !important; }
+.custom.disconnected div { display: block !important; }
+.custom.disconnected * { display: block !important; }
+.custom.disconnected .x, .custom.disconnected .y, .custom.disconnected .stick.right { display: none !important; }
+

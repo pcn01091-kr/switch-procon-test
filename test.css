@@ -76,21 +76,21 @@ html, body {
 .custom .bumper.left{
   left: 40px;
   top: 10px;
-  width: 135px;
+  width: 125px;
   height: 50px;
   border-radius: 0; /* rectangle */
 }
-.custom .bumper.left::after{ content: "LB"; }
+.custom .bumper.left::after{ content: "L"; }
 
 /* RB */
 .custom .bumper.right{
   right: 40px;
   top: 10px;
-  width: 135px;
+  width: 125px;
   height: 50px;
   border-radius: 0; /* rectangle */
 }
-.custom .bumper.right::after{ content: "RB"; }
+.custom .bumper.right::after{ content: "R"; }
 
 /* ===== A / B (Xbox: A bottom, B right) ===== */
 .custom .abxy{
@@ -113,7 +113,7 @@ html, body {
   right: 100px;
   top: 85px;
 }
-.custom .button.a::after{ content: "A"; }
+.custom .button.a::after{ content: "B"; }
 
 /* B (right) */
 .custom .button.b{
@@ -123,16 +123,60 @@ html, body {
   right: 40px;
   top: 55px;
 }
-.custom .button.b::after{ content: "B"; }
+.custom .button.b::after{ content: "A"; }
 
-/* ===== Left stick (big circle on left) ===== */
+/* ===== Left stick (full range movement) ===== */
 .custom .sticks{
   position: absolute;
   left: 30px;
   top: 80px;
-  width: 190px;
-  height: 190px;
+
+  /* 바깥 원 크기 */
+  width: 180px;
+  height: 180px;
 }
+
+/* 바깥 큰 원 */
+.custom .sticks::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 180px;
+  height: 180px;
+  border-radius: 999px;
+  border: 5px solid rgba(0,0,0,0.95);
+  background: rgba(255,255,255,0.02);
+  box-sizing: border-box;
+}
+
+/* L스틱 점 (가운데 원, 이동하는 것) */
+.custom .stick.left{
+  position: absolute;
+
+  /* 중심 기준 */
+  left: 50%;
+  top: 50%;
+
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  margin-top: -10px;
+
+  border-radius: 999px;
+  background: rgba(0,0,0,0.9);
+  box-shadow: 0 0 6px rgba(0,0,0,0.25);
+
+  /* ⭐ 중요: 이동 범위 제한 해제 */
+  transform: translate(0px, 0px);
+}
+
+/* 스틱 클릭 시(있다면) 빨간 불 */
+.custom .stick.pressed.left{
+  background: rgba(255,0,0,0.95);
+  box-shadow: 0 0 14px rgba(255,0,0,0.85);
+}
+
 
 /* hide right stick */
 .custom .stick.right{ display: none !important; }

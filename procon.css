@@ -1,0 +1,96 @@
+/* 배경 투명(OBS용) */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+}
+
+/* 전체 오버레이 캔버스 */
+#viewer{
+  position: relative;
+  width: 520px;   /* 필요하면 조절 */
+  height: 300px;  /* 필요하면 조절 */
+}
+
+/* 공통 버튼(캡슐/원형 둘 다) */
+.btn{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #0f0f10;
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: .5px;
+
+  /* 살짝 떠 보이는 느낌 */
+  box-shadow: 0 6px 14px rgba(0,0,0,.45);
+  user-select: none;
+}
+
+/* L / R (캡슐) */
+#btn-l, #btn-r{
+  width: 170px;
+  height: 62px;
+  border-radius: 999px;
+  font-size: 32px;
+  top: 10px;
+}
+
+#btn-l{ left: 40px; }
+#btn-r{ left: 230px; }
+
+/* A / B (원형) */
+#btn-a, #btn-b{
+  width: 92px;
+  height: 92px;
+  border-radius: 999px;
+  font-size: 34px;
+}
+
+#btn-a{
+  right: 40px;
+  top: 90px;
+}
+
+#btn-b{
+  right: 155px;
+  top: 155px;
+}
+
+/* L 스틱 영역(바깥 원) */
+#stick-base{
+  position: absolute;
+  width: 165px;
+  height: 165px;
+  border-radius: 999px;
+
+  left: 25px;
+  top: 105px;
+
+  /* 이미지처럼 연한 회색 링 */
+  background: rgba(255,255,255,.65);
+  box-shadow: inset 0 0 0 6px rgba(0,0,0,.18);
+}
+
+/* L 스틱 노브(안쪽 원) */
+#stick-dot{
+  position: absolute;
+  width: 118px;
+  height: 118px;
+  border-radius: 999px;
+
+  /* 기본은 가운데에 위치 */
+  left: calc(25px + (165px - 118px)/2);
+  top:  calc(105px + (165px - 118px)/2);
+
+  background: #0f0f10;
+  box-shadow: 0 10px 18px rgba(0,0,0,.45);
+}
+
+/* (선택) 눌렸을 때 스타일용 클래스 예시 */
+.pressed{
+  background: #fff !important;
+  color: #0f0f10 !important;
+}

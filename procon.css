@@ -1,96 +1,103 @@
-/* 배경 투명(OBS용) */
-html, body {
-  margin: 0;
-  padding: 0;
-  background: transparent;
+/* 기본 배경 제거 및 전체 캔버스 설정 */
+.controller.xbox {
+    background: none !important;
+    width: 800px;
+    height: 400px;
 }
 
-/* 전체 오버레이 캔버스 */
-#viewer{
-  position: relative;
-  width: 520px;   /* 필요하면 조절 */
-  height: 300px;  /* 필요하면 조절 */
+/* 모든 버튼 공통 스타일 */
+.controller.xbox .button {
+    background-color: #222222 !important;
+    border: 2px solid #000;
+    opacity: 1 !important;
 }
 
-/* 공통 버튼(캡슐/원형 둘 다) */
-.btn{
-  position: absolute;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background: #0f0f10;
-  color: #fff;
-  font-weight: 800;
-  letter-spacing: .5px;
-
-  /* 살짝 떠 보이는 느낌 */
-  box-shadow: 0 6px 14px rgba(0,0,0,.45);
-  user-select: none;
+/* 버튼 눌렸을 때 빨간색으로 변경 */
+.controller.xbox .button.pressed {
+    background-color: #ff0000 !important;
 }
 
-/* L / R (캡슐) */
-#btn-l, #btn-r{
-  width: 170px;
-  height: 62px;
-  border-radius: 999px;
-  font-size: 32px;
-  top: 10px;
+/* 버튼 텍스트 공통 스타일 */
+.controller.xbox .button::after {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    font-size: 30px;
 }
 
-#btn-l{ left: 40px; }
-#btn-r{ left: 230px; }
+/* L (LB) 버튼 */
+.controller.xbox .lb {
+    width: 140px;
+    height: 60px;
+    border-radius: 30px;
+    top: 20px;
+    left: 100px;
+}
+.controller.xbox .lb::after { content: "L"; }
 
-/* A / B (원형) */
-#btn-a, #btn-b{
-  width: 92px;
-  height: 92px;
-  border-radius: 999px;
-  font-size: 34px;
+/* R (RB) 버튼 */
+.controller.xbox .rb {
+    width: 140px;
+    height: 60px;
+    border-radius: 30px;
+    top: 20px;
+    left: 350px;
+}
+.controller.xbox .rb::after { content: "R"; }
+
+/* A 버튼 */
+.controller.xbox .a {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    top: 150px;
+    left: 550px;
+}
+.controller.xbox .a::after { content: "A"; }
+
+/* B 버튼 */
+.controller.xbox .b {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    top: 250px;
+    left: 450px;
+}
+.controller.xbox .b::after { content: "B"; }
+
+/* 스틱 스타일 (왼쪽 스틱 기준) */
+.controller.xbox .stick.left {
+    background: #cccccc !important; /* 배경 회색 원 */
+    border: 3px solid #333;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    top: 180px;
+    left: 50px;
 }
 
-#btn-a{
-  right: 40px;
-  top: 90px;
+/* 움직이는 스틱 헤드 */
+.controller.xbox .stick.left .inner {
+    background: #222222 !important; /* 움직이는 부분 검은색 */
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-left: -40px;
+    margin-top: -40px;
 }
 
-#btn-b{
-  right: 155px;
-  top: 155px;
-}
-
-/* L 스틱 영역(바깥 원) */
-#stick-base{
-  position: absolute;
-  width: 165px;
-  height: 165px;
-  border-radius: 999px;
-
-  left: 25px;
-  top: 105px;
-
-  /* 이미지처럼 연한 회색 링 */
-  background: rgba(255,255,255,.65);
-  box-shadow: inset 0 0 0 6px rgba(0,0,0,.18);
-}
-
-/* L 스틱 노브(안쪽 원) */
-#stick-dot{
-  position: absolute;
-  width: 118px;
-  height: 118px;
-  border-radius: 999px;
-
-  /* 기본은 가운데에 위치 */
-  left: calc(25px + (165px - 118px)/2);
-  top:  calc(105px + (165px - 118px)/2);
-
-  background: #0f0f10;
-  box-shadow: 0 10px 18px rgba(0,0,0,.45);
-}
-
-/* (선택) 눌렸을 때 스타일용 클래스 예시 */
-.pressed{
-  background: #fff !important;
-  color: #0f0f10 !important;
+/* 사용하지 않는 버튼들 숨기기 */
+.controller.xbox .x, 
+.controller.xbox .y, 
+.controller.xbox .start, 
+.controller.xbox .select, 
+.controller.xbox .dpad, 
+.controller.xbox .stick.right,
+.controller.xbox .trigger {
+    display: none !important;
 }

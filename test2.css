@@ -1,0 +1,186 @@
+/* GV - Soft Pills + Circles (SAFE selectors)
+   Shows only: L/R (bumpers), A/B, Left stick
+*/
+
+html, body {
+  background: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+}
+
+.controller.custom{
+  position: fixed;
+  right: 46px;
+  bottom: 46px;
+  width: 520px;
+  height: 240px;
+  background: transparent !important;
+}
+
+/* ===== 안전: disconnected여도 숨지 않게 ===== */
+.controller.custom.disconnected,
+.controller.custom.disconnected *{
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* ===== (중요) 전체 숨김을 “필요 요소만 숨김”으로 변경 =====
+   - 기존처럼 custom * 전체를 display:none 하지 않는다.
+   - 대신 우리가 원하지 않는 요소들을 명시적으로 숨긴다.
+*/
+
+/* 숨길 요소들(필요 없으면 계속 추가 가능) */
+.custom .triggers,
+.custom .trigger,
+.custom .dpad,
+.custom .face,
+.custom .meta,
+.custom .start,
+.custom .back,
+.custom .misc,
+.custom .touchpad,
+.custom .p0, .custom .p1, .custom .p2, .custom .p3, .custom .p4,
+.custom .button.x, .custom .button.y,
+.custom .stick.right{
+  display: none !important;
+}
+
+/* ===== 공통 스타일 ===== */
+:root{
+  --dark: rgba(12,12,12,0.92);
+  --dark2: rgba(25,25,25,0.92);
+  --text: rgba(255,255,255,0.90);
+  --shadow: 0 10px 20px rgba(0,0,0,0.35);
+  --shadow2: 0 2px 0 rgba(255,255,255,0.06) inset;
+}
+
+.custom .bumper.left,
+.custom .bumper.right,
+.custom .button.a,
+.custom .button.b{
+  position: absolute;
+  background: linear-gradient(180deg, var(--dark2), var(--dark));
+  box-shadow: var(--shadow), var(--shadow2);
+  border: 0 !important;
+  transform: translateZ(0);
+}
+
+/* 눌림 효과 */
+.custom .bumper.pressed,
+.custom .button.pressed{
+  filter: brightness(1.18);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.45), 0 0 0 2px rgba(255,255,255,0.06) inset;
+}
+
+/* 글자 */
+.custom .bumper.left::after,
+.custom .bumper.right::after,
+.custom .button.a::after,
+.custom .button.b::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 800 34px/1 system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: var(--text);
+  text-shadow: 0 2px 0 rgba(0,0,0,0.35);
+}
+
+/* ===== L / R 알약 ===== */
+.custom .bumpers{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 520px;
+  height: 90px;
+}
+
+.custom .bumper.left{
+  left: 60px;
+  top: 16px;
+  width: 190px;
+  height: 58px;
+  border-radius: 999px;
+}
+.custom .bumper.left::after{ content: "L"; }
+
+.custom .bumper.right{
+  left: 270px;
+  top: 16px;
+  width: 190px;
+  height: 58px;
+  border-radius: 999px;
+}
+.custom .bumper.right::after{ content: "R"; }
+
+/* ===== A / B 동그라미 ===== */
+.custom .abxy{
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 520px;
+  height: 240px;
+}
+
+.custom .button.b{
+  left: 330px;
+  top: 136px;
+  width: 86px;
+  height: 86px;
+  border-radius: 999px;
+}
+.custom .button.b::after{ content: "B"; }
+
+.custom .button.a{
+  left: 410px;
+  top: 96px;
+  width: 86px;
+  height: 86px;
+  border-radius: 999px;
+}
+.custom .button.a::after{ content: "A"; }
+
+/* ===== Left Stick (회색 바탕 + 검은 원) ===== */
+.custom .sticks{
+  position: absolute;
+  left: 40px;
+  top: 88px;
+  width: 220px;
+  height: 220px;
+}
+
+/* 회색 바탕 */
+.custom .sticks::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 190px;
+  height: 190px;
+  border-radius: 999px;
+  background: rgba(210,210,210,0.95);
+  box-shadow: 0 10px 18px rgba(0,0,0,0.28);
+}
+
+/* 움직이는 스틱 원
+   - 중심을 50/50로 잡아두면 GV의 translate가 더 안정적으로 적용됨 */
+.custom .stick.left{
+  position: absolute;
+  left: 95px;
+  top: 95px;
+  width: 104px;
+  height: 104px;
+  margin-left: -52px;
+  margin-top: -52px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(25,25,25,0.95), rgba(8,8,8,0.95));
+  box-shadow: 0 14px 22px rgba(0,0,0,0.40), 0 2px 0 rgba(255,255,255,0.06) inset;
+}
+
+/* 스틱 클릭 강조 */
+.custom .stick.pressed.left{
+  filter: brightness(1.15);
+}

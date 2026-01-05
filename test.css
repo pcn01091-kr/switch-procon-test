@@ -1,5 +1,8 @@
-/* GamepadViewer - Minimal (L, R, A, B, Left Stick only)
-   Layout matches your sketch: L/R rectangles on top, big left stick circle, A/B circles on right
+/* GamepadViewer - Minimal (Xbox: LB, RB, A, B, Left Stick only)
+   - Transparent background
+   - Bottom-right overlay
+   - Sketch-like layout: LB/RB rectangles, big left stick circle, A/B on right
+   - Pressed = red glow
 */
 
 html, body {
@@ -9,13 +12,11 @@ html, body {
   overflow: hidden !important;
 }
 
-/* Anchor bottom-right (good for 1920x1080) */
 .controller.custom{
   position: fixed;
   right: 40px;
   bottom: 40px;
 
-  /* overall overlay size (adjust if you want smaller/larger) */
   width: 360px;
   height: 220px;
 
@@ -25,7 +26,7 @@ html, body {
 /* Hide EVERYTHING first */
 .custom * { display: none; }
 
-/* Turn on only the groups we need */
+/* Enable only what we need */
 .custom .bumpers,
 .custom .bumper,
 .custom .abxy,
@@ -33,15 +34,15 @@ html, body {
 .custom .sticks,
 .custom .stick { display: block; }
 
-/* ========== Common styles ========== */
+/* ===== Common styles ===== */
 .custom .button,
 .custom .bumper{
+  position: absolute;
   box-sizing: border-box;
   border: 4px solid rgba(0,0,0,0.95);
   background: rgba(255,255,255,0.02);
 }
 
-/* label text */
 .custom .button::after,
 .custom .bumper::after{
   content: "";
@@ -50,7 +51,7 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font: 900 26px/1 sans-serif;
+  font: 900 24px/1 sans-serif;
   color: rgba(0,0,0,0.95);
 }
 
@@ -62,7 +63,7 @@ html, body {
   background: rgba(255, 0, 0, 0.10);
 }
 
-/* ========== L / R rectangles (top) ========== */
+/* ===== LB / RB rectangles (top) ===== */
 .custom .bumpers{
   position: absolute;
   left: 0;
@@ -71,29 +72,27 @@ html, body {
   height: 70px;
 }
 
-/* L */
+/* LB */
 .custom .bumper.left{
-  position: absolute;
   left: 40px;
   top: 10px;
-  width: 120px;
+  width: 135px;
   height: 50px;
-  border-radius: 0; /* sketch-like rectangle */
+  border-radius: 0; /* rectangle */
 }
-.custom .bumper.left::after{ content: "L"; }
+.custom .bumper.left::after{ content: "LB"; }
 
-/* R */
+/* RB */
 .custom .bumper.right{
-  position: absolute;
   right: 40px;
   top: 10px;
-  width: 120px;
+  width: 135px;
   height: 50px;
-  border-radius: 0; /* sketch-like rectangle */
+  border-radius: 0; /* rectangle */
 }
-.custom .bumper.right::after{ content: "R"; }
+.custom .bumper.right::after{ content: "RB"; }
 
-/* ========== A / B (right side circles) ========== */
+/* ===== A / B (Xbox: A bottom, B right) ===== */
 .custom .abxy{
   position: absolute;
   right: 0;
@@ -106,29 +105,27 @@ html, body {
 .custom .abxy .x,
 .custom .abxy .y{ display: none !important; }
 
-/* A (upper-right) */
+/* A (bottom) */
 .custom .button.a{
-  position: absolute;
-  right: 55px;
-  top: 20px;
   width: 62px;
   height: 62px;
   border-radius: 999px;
+  right: 100px;
+  top: 85px;
 }
 .custom .button.a::after{ content: "A"; }
 
-/* B (lower-left-ish under A) */
+/* B (right) */
 .custom .button.b{
-  position: absolute;
-  right: 110px;
-  top: 85px;
   width: 62px;
   height: 62px;
   border-radius: 999px;
+  right: 40px;
+  top: 55px;
 }
 .custom .button.b::after{ content: "B"; }
 
-/* ========== Left stick (big circle on left) ========== */
+/* ===== Left stick (big circle on left) ===== */
 .custom .sticks{
   position: absolute;
   left: 30px;
@@ -140,7 +137,7 @@ html, body {
 /* hide right stick */
 .custom .stick.right{ display: none !important; }
 
-/* Big outer circle (sketch look) */
+/* Big outer circle */
 .custom .sticks::before{
   content: "";
   position: absolute;
@@ -165,11 +162,4 @@ html, body {
   margin-top: -9px;
   border-radius: 999px;
   background: rgba(0,0,0,0.85);
-  box-shadow: 0 0 6px rgba(0,0,0,0.25);
-}
-
-/* If GV marks stick pressed, make it red */
-.custom .stick.pressed.left{
-  background: rgba(255,0,0,0.95);
-  box-shadow: 0 0 14px rgba(255,0,0,0.85);
-}
+  box-shadow: 0 0 6px rgba(0,0

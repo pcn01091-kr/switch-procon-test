@@ -1,8 +1,9 @@
 /* GamepadViewer - Minimal (Xbox: LB, RB, A, B, Left Stick only)
    - Transparent background
    - Bottom-right overlay
-   - Sketch-like layout: LB/RB rectangles, big left stick circle, A/B on right
+   - Sketch-like layout
    - Pressed = red glow
+   - Left stick dot reaches outer ring (full range feel)
 */
 
 html, body {
@@ -76,21 +77,21 @@ html, body {
 .custom .bumper.left{
   left: 40px;
   top: 10px;
-  width: 125px;
+  width: 135px;
   height: 50px;
-  border-radius: 0; /* rectangle */
+  border-radius: 0;
 }
-.custom .bumper.left::after{ content: "L"; }
+.custom .bumper.left::after{ content: "LB"; }
 
 /* RB */
 .custom .bumper.right{
   right: 40px;
   top: 10px;
-  width: 125px;
+  width: 135px;
   height: 50px;
-  border-radius: 0; /* rectangle */
+  border-radius: 0;
 }
-.custom .bumper.right::after{ content: "R"; }
+.custom .bumper.right::after{ content: "RB"; }
 
 /* ===== A / B (Xbox: A bottom, B right) ===== */
 .custom .abxy{
@@ -113,7 +114,7 @@ html, body {
   right: 100px;
   top: 85px;
 }
-.custom .button.a::after{ content: "B"; }
+.custom .button.a::after{ content: "A"; }
 
 /* B (right) */
 .custom .button.b{
@@ -123,20 +124,30 @@ html, body {
   right: 40px;
   top: 55px;
 }
-.custom .button.b::after{ content: "A"; }
+.custom .button.b::after{ content: "B"; }
 
-/* ===== Left stick (full range movement) ===== */
+/* =========================================================
+   Left Stick (FULL RANGE FEEL)
+   - Outer big circle stays
+   - Inner moving circle (with "L") centers via 50%/50%
+   - Lets GV's transform translate move it farther visually
+   ========================================================= */
+
+/* stick group position */
 .custom .sticks{
   position: absolute;
   left: 30px;
   top: 80px;
 
-  /* 바깥 원 크기 */
+  /* outer circle size */
   width: 180px;
   height: 180px;
 }
 
-/* 바깥 큰 원 */
+/* hide right stick completely */
+.custom .stick.right{ display: none !important; }
+
+/* Outer big circle */
 .custom .sticks::before{
   content: "";
   position: absolute;
@@ -150,60 +161,38 @@ html, body {
   box-sizing: border-box;
 }
 
-/* L스틱 점 (가운데 원, 이동하는 것) */
+/* Inner moving circle (this is the "L" circle you mentioned) */
 .custom .stick.left{
   position: absolute;
-
-  /* 중심 기준 */
   left: 50%;
   top: 50%;
 
-  width: 20px;
-  height: 20px;
-  margin-left: -10px;
-  margin-top: -10px;
+  width: 54px;
+  height: 54px;
+  margin-left: -27px;
+  margin-top: -27px;
 
   border-radius: 999px;
-  background: rgba(0,0,0,0.9);
-  box-shadow: 0 0 6px rgba(0,0,0,0.25);
-
-  /* ⭐ 중요: 이동 범위 제한 해제 */
-  transform: translate(0px, 0px);
-}
-
-/* 스틱 클릭 시(있다면) 빨간 불 */
-.custom .stick.pressed.left{
-  background: rgba(255,0,0,0.95);
-  box-shadow: 0 0 14px rgba(255,0,0,0.85);
-}
-
-
-/* hide right stick */
-.custom .stick.right{ display: none !important; }
-
-/* Big outer circle */
-.custom .sticks::before{
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 170px;
-  height: 170px;
-  border-radius: 999px;
-  border: 5px solid rgba(0,0,0,0.95);
+  border: 4px solid rgba(0,0,0,0.95);
   background: rgba(255,255,255,0.02);
   box-sizing: border-box;
 }
 
-/* stick dot (moves with analog input in many GV skins) */
-.custom .stick.left{
+/* "L" label inside the moving circle */
+.custom .stick.left::after{
+  content: "L";
   position: absolute;
-  left: 85px;
-  top: 85px;
-  width: 18px;
-  height: 18px;
-  margin-left: -9px;
-  margin-top: -9px;
-  border-radius: 999px;
-  background: rgba(0,0,0,0.85);
-  box-shadow: 0 0 6px rgba(0,0
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font: 900 26px/1 sans-serif;
+  color: rgba(0,0,0,0.95);
+}
+
+/* If GV marks stick pressed, glow red */
+.custom .stick.pressed.left{
+  border-color: rgba(255, 0, 0, 0.95);
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.9);
+  background: rgba(255, 0, 0, 0.10);
+}

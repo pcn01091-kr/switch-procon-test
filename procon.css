@@ -1,89 +1,89 @@
-/* 기본 배경 제거 및 전체 캔버스 설정 */
-.controller.xbox {
+/* 전체 배경 투명화 및 초기화 */
+.controller.xbox-360 {
     background: none !important;
     width: 800px;
-    height: 400px;
+    height: 450px;
 }
 
-/* 모든 버튼 공통 스타일 */
-.controller.xbox .button {
+/* 모든 버튼 공통: 검은색 원형/타원형 */
+.controller.xbox-360 .button {
     background-color: #222222 !important;
     border: 2px solid #000;
     opacity: 1 !important;
 }
 
 /* 버튼 눌렸을 때 빨간색으로 변경 */
-.controller.xbox .button.pressed {
+.controller.xbox-360 .button.pressed {
     background-color: #ff0000 !important;
 }
 
-/* 버튼 텍스트 공통 스타일 */
-.controller.xbox .button::after {
+/* 버튼 내부 텍스트 스타일 (L, R, A, B) */
+.controller.xbox-360 .button::after {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     font-weight: bold;
-    font-size: 30px;
+    font-size: 32px;
 }
 
-/* L (LB) 버튼 */
-.controller.xbox .lb {
+/* L (LB) 버튼 - 타원형 */
+.controller.xbox-360 .lb {
     width: 140px;
     height: 60px;
     border-radius: 30px;
-    top: 20px;
-    left: 100px;
+    top: 30px;
+    left: 120px;
 }
-.controller.xbox .lb::after { content: "L"; }
+.controller.xbox-360 .lb::after { content: "L"; }
 
-/* R (RB) 버튼 */
-.controller.xbox .rb {
+/* R (RB) 버튼 - 타원형 */
+.controller.xbox-360 .rb {
     width: 140px;
     height: 60px;
     border-radius: 30px;
-    top: 20px;
-    left: 350px;
+    top: 30px;
+    left: 380px;
 }
-.controller.xbox .rb::after { content: "R"; }
+.controller.xbox-360 .rb::after { content: "R"; }
 
-/* A 버튼 */
-.controller.xbox .a {
+/* A 버튼 - 원형 */
+.controller.xbox-360 .a {
     width: 90px;
     height: 90px;
     border-radius: 50%;
     top: 150px;
-    left: 550px;
+    left: 580px;
 }
-.controller.xbox .a::after { content: "A"; }
+.controller.xbox-360 .a::after { content: "A"; }
 
-/* B 버튼 */
-.controller.xbox .b {
+/* B 버튼 - 원형 */
+.controller.xbox-360 .b {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    top: 250px;
-    left: 450px;
+    top: 260px;
+    left: 480px;
 }
-.controller.xbox .b::after { content: "B"; }
+.controller.xbox-360 .b::after { content: "B"; }
 
-/* 스틱 스타일 (왼쪽 스틱 기준) */
-.controller.xbox .stick.left {
-    background: #cccccc !important; /* 배경 회색 원 */
+/* 왼쪽 스틱 (큰 회색 원) */
+.controller.xbox-360 .stick.left {
+    background: #cccccc !important;
     border: 3px solid #333;
-    width: 150px;
-    height: 150px;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
     top: 180px;
-    left: 50px;
+    left: 60px;
 }
 
-/* 움직이는 스틱 헤드 */
-.controller.xbox .stick.left .inner {
-    background: #222222 !important; /* 움직이는 부분 검은색 */
+/* 움직이는 스틱 내부 (작은 검은색 원) */
+.controller.xbox-360 .stick.left .inner {
+    background: #222222 !important;
     width: 80px;
     height: 80px;
     border-radius: 50%;
@@ -91,13 +91,14 @@
     margin-top: -40px;
 }
 
-/* 사용하지 않는 버튼들 숨기기 */
-.controller.xbox .x, 
-.controller.xbox .y, 
-.controller.xbox .start, 
-.controller.xbox .select, 
-.controller.xbox .dpad, 
-.controller.xbox .stick.right,
-.controller.xbox .trigger {
+/* 나머지 안 쓰는 버튼들 숨기기 */
+.controller.xbox-360 .x, 
+.controller.xbox-360 .y, 
+.controller.xbox-360 .start, 
+.controller.xbox-360 .back, 
+.controller.xbox-360 .dpad, 
+.controller.xbox-360 .stick.right,
+.controller.xbox-360 .trigger,
+.controller.xbox-360 .logitech {
     display: none !important;
 }

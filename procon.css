@@ -1,106 +1,94 @@
-/* 전체 배경 투명화 및 초기화 */
-.controller.switch-pro {
-    background: none !important;
+/* 1. 기본 배경 및 불필요한 이미지 제거 */
+.controller {
+    background: transparent !important;
     width: 800px;
-    height: 450px;
+    height: 500px;
 }
 
-/* 모든 버튼 공통 스타일: 검은색 원형/타원형 */
-.controller.switch-pro .button {
+/* 모든 기본 버튼과 스틱을 일단 숨김 (깨끗한 상태에서 시작) */
+.controller .button,
+.controller .stick,
+.controller .dpad,
+.controller .trigger {
+    display: none !important;
+}
+
+/* 2. 필요한 버튼만 다시 표시 (L, R, A, B, 왼쪽 스틱) */
+.controller .button.a,
+.controller .button.b,
+.controller .button.lb, .controller .button.l,
+.controller .button.rb, .controller .button.r,
+.controller .stick.left {
+    display: block !important;
+}
+
+/* 3. 버튼 공통 디자인 (검은색 원형) */
+.controller .button {
     background-color: #222222 !important;
     border: 2px solid #000;
     opacity: 1 !important;
+    position: absolute;
 }
 
-/* 버튼 눌렸을 때 빨간색으로 변경 */
-.controller.switch-pro .button.pressed {
+/* 버튼 눌렸을 때 빨간색 */
+.controller .button.pressed {
     background-color: #ff0000 !important;
 }
 
-/* 버튼 내부 텍스트 스타일 */
-.controller.switch-pro .button::after {
+/* 버튼 텍스트 스타일 */
+.controller .button::after {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 100%;
     color: white;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     font-weight: bold;
-    font-size: 32px;
+    font-size: 30px;
 }
 
-/* L 버튼 (L 숄더) */
-.controller.switch-pro .l {
-    width: 140px;
-    height: 60px;
-    border-radius: 30px;
-    top: 30px;
-    left: 120px;
-}
-.controller.switch-pro .l::after { content: "L"; }
+/* --- 각 버튼 위치 및 크기 설정 --- */
 
-/* R 버튼 (R 숄더) */
-.controller.switch-pro .r {
-    width: 140px;
-    height: 60px;
-    border-radius: 30px;
-    top: 30px;
-    left: 380px;
+/* L 버튼 (LB 또는 L 대응) */
+.controller .lb, .controller .l {
+    width: 140px; height: 60px; border-radius: 30px !important;
+    top: 50px; left: 150px;
 }
-.controller.switch-pro .r::after { content: "R"; }
+.controller .lb::after, .controller .l::after { content: "L"; }
 
-/* A 버튼 (이미지처럼 위쪽에 배치) */
-.controller.switch-pro .a {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    top: 150px;
-    left: 580px;
+/* R 버튼 (RB 또는 R 대응) */
+.controller .rb, .controller .r {
+    width: 140px; height: 60px; border-radius: 30px !important;
+    top: 50px; left: 450px;
 }
-.controller.switch-pro .a::after { content: "A"; }
+.controller .rb::after, .controller .r::after { content: "R"; }
 
-/* B 버튼 (이미지처럼 아래쪽에 배치) */
-.controller.switch-pro .b {
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    top: 260px;
-    left: 480px;
+/* A 버튼 */
+.controller .a {
+    width: 100px; height: 100px; border-radius: 50%;
+    top: 180px; left: 600px;
 }
-.controller.switch-pro .b::after { content: "B"; }
+.controller .a::after { content: "A"; }
 
-/* 왼쪽 스틱 (회색 큰 원) */
-.controller.switch-pro .stick.left {
+/* B 버튼 */
+.controller .b {
+    width: 100px; height: 100px; border-radius: 50%;
+    top: 300px; left: 500px;
+}
+.controller .b::after { content: "B"; }
+
+/* 4. 왼쪽 스틱 디자인 (회색 원) */
+.controller .stick.left {
     background: #cccccc !important;
     border: 3px solid #333;
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
-    top: 180px;
-    left: 60px;
+    width: 180px; height: 180px; border-radius: 50%;
+    top: 220px; left: 100px;
 }
 
-/* 움직이는 스틱 내부 (검은색 작은 원) */
-.controller.switch-pro .stick.left .inner {
+/* 스틱 내부 움직이는 부분 */
+.controller .stick.left .inner {
     background: #222222 !important;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-left: -40px;
-    margin-top: -40px;
-}
-
-/* 나머지 사용하지 않는 모든 UI 숨기기 */
-.controller.switch-pro .x, 
-.controller.switch-pro .y, 
-.controller.switch-pro .plus, 
-.controller.switch-pro .minus, 
-.controller.switch-pro .home, 
-.controller.switch-pro .capture, 
-.controller.switch-pro .dpad, 
-.controller.switch-pro .stick.right,
-.controller.switch-pro .zl, 
-.controller.switch-pro .zr {
-    display: none !important;
+    width: 90px; height: 90px; border-radius: 50%;
+    margin-left: -45px; margin-top: -45px;
 }
